@@ -9,6 +9,7 @@ module.exports = {
         background: {
           dark: "#000000",
           blue: "#14213d",
+          darkblue: "#131022"
         },
         text: {
           light: "#e5e5e5",

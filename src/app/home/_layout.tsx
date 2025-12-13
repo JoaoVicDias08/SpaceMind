@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { Slot } from "expo-router";
-import BottomTabs from "../../components/BottomTabs";
+import BottomTabs from "../../components/bottomTabs";
 
 export default function HomeLayout() {
   return (
