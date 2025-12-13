@@ -2,12 +2,11 @@ import { View, Text, Pressable } from "react-native";
 import { router, usePathname } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
-// Tipos
 type IoniconName = React.ComponentProps<typeof Ionicons>["name"];
 
 type TabItem = {
   name: string;
-  route: `/${string}`; // Rota absoluta que é aceita pelo Expo Router
+  route: `/${string}`; 
   icon: IoniconName;
 };
 
@@ -24,7 +23,6 @@ export default function BottomTabs() {
   return (
     <View className="flex-row justify-around items-center bg-background-blue py-3">
       {tabs.map((tab) => {
-        // CORRETO: reconhece /home/home, /home/home/ e /home/home/index
         const isActive = pathname.startsWith(tab.route);
 
         return (

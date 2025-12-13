@@ -1,5 +1,6 @@
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useState } from 'react'
 
 type Props = {
   label: string;
@@ -18,6 +19,11 @@ export default function FormInput({
   value,
   onChangeText,
 }: Props) {
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const isPassword = secureTextEntry;
+
   return (
     <View className="mb-4">
       {/* Label */}
@@ -38,10 +44,20 @@ export default function FormInput({
           className="flex-1 py-3 text-white"
           placeholder={placeholder}
           placeholderTextColor="#9ca3af"
-          secureTextEntry={secureTextEntry}
+          secureTextEntry={isPassword && !showPassword}
           value={value}
           onChangeText={onChangeText}
         />
+
+        {isPassword && (
+          <Pressable onPress={() => setShowPassword(!showPassword)}>
+            <Ionicons
+              name={showPassword ? "eye-off" : "eye"}
+              size={20}
+              color="#9ca3af"
+            />
+          </Pressable>
+        )}
       </View>
     </View>
   );
