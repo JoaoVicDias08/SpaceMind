@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 
-export default function Planets() {
+export default function About() {
  return (
    <View>
         <Text>Planets Screen</Text>

@@ -32,7 +32,7 @@ export default function FormInput({
       </Text>
 
       {/* Input com ícone */}
-      <View className="flex-row items-center bg-black/40 border border-white/10 rounded-lg px-3">
+      <View className="flex-row items-center bg-black/40 border border-white/10 rounded-lg px-4">
         <Ionicons
           name={icon}
           size={20}
@@ -41,7 +41,7 @@ export default function FormInput({
         />
 
         <TextInput
-          className="flex-1 py-3 text-white"
+          className="flex-1 py-6 text-white"
           placeholder={placeholder}
           placeholderTextColor="#9ca3af"
           secureTextEntry={isPassword && !showPassword}
