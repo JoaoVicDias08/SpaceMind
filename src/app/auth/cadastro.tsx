@@ -35,7 +35,6 @@ export default function Cadastro() {
 
   return (
     <View className="flex-1 bg-background-darkblue">
-      {/* Overlay gradiente */}
       <LinearGradient
         colors={[
           "rgba(59,130,246,0.35)",
@@ -48,7 +47,6 @@ export default function Cadastro() {
       />
 
       <View className="flex-1 px-6 pt-16">
-        {/* Voltar */}
         <Ionicons
           name="arrow-back"
           size={28}
