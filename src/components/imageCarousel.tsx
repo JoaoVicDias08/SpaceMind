@@ -1,15 +1,15 @@
-import {
-  View,
-  Image,
-  Dimensions,
-  Animated,
-  FlatList,
-  Pressable,
-  Text,
-} from "react-native";
-import { useRef, useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { useEffect, useRef, useState } from "react";
+import {
+  Animated,
+  Dimensions,
+  FlatList,
+  Image,
+  Pressable,
+  Text,
+  View,
+} from "react-native";
 
 const { width } = Dimensions.get("window");
 
@@ -106,9 +106,9 @@ export default function ImageCarousel() {
           {/* Botão */}
           <Pressable
             onPress={() => router.push(item.route)}
-            className="bg-white/90 p-3 rounded-full"
+            className="bg-primary p-3 rounded-full"
           >
-            <Ionicons name="arrow-forward" size={20} color="#000" />
+            <Ionicons name="arrow-forward" size={20} color="#0b0530" />
           </Pressable>
         </View>
       </Animated.View>

@@ -1,7 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
-import { View, Text, Pressable, Animated, Dimensions } from "react-native";
-import { useState, useRef } from "react";
+import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router"; // ou react-navigation
+import { useRef, useState } from "react";
+import { Animated, Dimensions, Pressable, Text, View } from "react-native";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -55,11 +56,19 @@ export default function HeaderMenu() {
           zIndex: 100,
         }}
       >
+        <LinearGradient
+          colors={["#131022", "#14213d"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          className="absolute inset-0"
+        />
         {/* Perfil */}
         <View className="flex-row justify-between items-start px-2">
           <View className="items-start">
-            <View className="bg-text-purple w-24 h-24 rounded-full items-center justify-center">
-              <Ionicons name="person" size={48} color="#fff" />
+            <View className="w-24 h-24 rounded-full items-center justify-center overflow-hidden">
+              <LinearGradient colors={["#9a90cb", "#6366f1"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} className="w-full h-full items-center justify-center">
+                <Ionicons name="person" size={48} color="#fff" />
+              </LinearGradient>
             </View>
             <Text className="text-white text-lg mt-4 font-body">
               Comandante João
@@ -68,7 +77,7 @@ export default function HeaderMenu() {
               <Ionicons
                 name="ribbon"
                 size={20}
-                color="#FACC15"
+                color="#ffd60a"
                 className="mr-2"
               />
               <Text className="text-secondary font-bodyBold text-xl">

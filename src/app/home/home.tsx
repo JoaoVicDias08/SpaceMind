@@ -1,11 +1,11 @@
-import { View, Text } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import DailyFact from "@/src/components/dailyFact";
 import HeaderMenu from "@/src/components/headerMenu";
 import ImageCarousel from "@/src/components/imageCarousel";
+import { ScrollView, Text, View } from "react-native";
 
 export default function HomeScreen() {
   return (
-    <View className="flex-1 bg-background-darkblue">
+    <ScrollView className="flex-1 bg-background-darkblue">
 
       <HeaderMenu/>
 
@@ -17,6 +17,8 @@ export default function HomeScreen() {
 
         <ImageCarousel />
 
-    </View>
+        <DailyFact/>
+
+    </ScrollView>
   );
 }
