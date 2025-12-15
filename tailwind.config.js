@@ -16,7 +16,7 @@ module.exports = {
           dark: "#000000",
           purple: "#9a90cb"
         },
-        primary: "#ffd60a",
+        primary: "#4500BD",
         secondary: "#0d00a4",
       },
       fontFamily: {

@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { GradientTitle } from "../components/gradientTitle";
 import LottieView from "lottie-react-native";
 import { MotiView } from "moti";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 export default function Index() {
   const [pressed, setPressed] = useState(false);
@@ -21,7 +21,7 @@ export default function Index() {
     }, 120);
 
     setTimeout(() => {
-      router.push("/auth/cadastro");
+      router.push("/auth/register");
       setDisabled(false);
     }, 260);
   };

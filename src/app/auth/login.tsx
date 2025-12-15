@@ -153,7 +153,7 @@ export default function Login() {
           animate={{ opacity: 1 }}
           transition={{ delay: 700 }}
         >
-          <Pressable onPress={() => router.push("/auth/cadastro")}>
+          <Pressable onPress={() => router.push("/auth/register")}>
             <Text className="mt-4 text-text-light text-center text-xl font-body">
               Não tem uma conta?{" "}
               <Text className="text-blue-600 font-bodyBold">
