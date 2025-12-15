@@ -93,20 +93,16 @@ export default function ImageCarousel() {
           resizeMode="cover"
         />
 
-        {/* Overlay */}
         <View className="absolute inset-0 bg-black/40" />
 
-        {/* Conteúdo */}
         <View className="absolute inset-0 flex-row items-end justify-between p-5">
-          {/* Título */}
           <Text className="text-white text-2xl font-title max-w-[70%]">
             {item.title}
           </Text>
 
-          {/* Botão */}
           <Pressable
             onPress={() => router.push(item.route)}
-            className="bg-primary p-3 rounded-full"
+            className="bg-text-purple p-3 rounded-full"
           >
             <Ionicons name="arrow-forward" size={20} color="#0b0530" />
           </Pressable>

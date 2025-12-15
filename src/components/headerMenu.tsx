@@ -29,20 +29,18 @@ export default function HeaderMenu() {
 
   return (
     <>
-      {/* Header */}
-      <View className="flex flex-row mt-12 justify-between items-center w-full border-b border-text-purple/30 pb-6 px-4">
+      <View className="flex flex-row mt-12 justify-between items-center w-full border-b border-text-purple/30 pb-6 px-4 pt-1">
         <Pressable onPress={toggleMenu}>
           <Ionicons name="menu" size={28} color="#fff" />
         </Pressable>
 
-        <Text className="font-titleLight text-text-light text-2xl">
+        <Text className="font-title text-text-light text-2xl">
           Explorador do cosmos
         </Text>
 
         <Ionicons name="search" size={28} color="#fff" />
       </View>
 
-      {/* Menu Lateral */}
       <Animated.View
         style={{
           position: "absolute",
@@ -62,7 +60,6 @@ export default function HeaderMenu() {
           end={{ x: 1, y: 1 }}
           className="absolute inset-0"
         />
-        {/* Perfil */}
         <View className="flex-row justify-between items-start px-2">
           <View className="items-start">
             <View className="w-24 h-24 rounded-full items-center justify-center overflow-hidden">
@@ -95,7 +92,6 @@ export default function HeaderMenu() {
           />
         </View>
 
-        {/* Links */}
         <View className="mt-4">
           {menuItems.map((item) => (
             <Pressable
@@ -117,7 +113,6 @@ export default function HeaderMenu() {
           ))}
         </View>
 
-        {/* Botão Sair da Missão */}
         <Pressable
           className="flex-row items-center justify-center border-t border-text-purple/30 mt-auto py-4"
           onPress={() => console.log("Sair da missão")}
@@ -129,7 +124,6 @@ export default function HeaderMenu() {
         <Text className="text-text-purple text-center mt-4">v1.0.4</Text>
       </Animated.View>
 
-      {/* Overlay */}
       {menuOpen && (
         <Pressable
           style={{
