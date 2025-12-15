@@ -1,42 +1,20 @@
 import { useEffect, useRef, useState } from "react";
-import { View, Text, Animated, Pressable, ScrollView, Dimensions } from "react-native";
+import { View, Text, Animated, Pressable, ScrollView } from "react-native";
 import { MotiView } from "moti";
 import LottieView from "lottie-react-native";
 
-const { width } = Dimensions.get("window");
-
 const moonPhases = [
-  {
-    id: "new",
-    name: "Lua Nova",
-    description:
-      "A Lua Nova ocorre quando a Lua está entre a Terra e o Sol. Ela não é visível da Terra e marca o início de um novo ciclo lunar.",
-  },
-  {
-    id: "waxing",
-    name: "Crescente",
-    description:
-      "Durante a fase Crescente, a Lua começa a se tornar visível após a Lua Nova, iluminando gradualmente seu lado direito.",
-  },
-  {
-    id: "full",
-    name: "Lua Cheia",
-    description:
-      "A Lua Cheia ocorre quando a Lua está totalmente iluminada pelo Sol e é visível como um círculo completo no céu noturno.",
-  },
-  {
-    id: "waning",
-    name: "Minguante",
-    description:
-      "Na fase Minguante, a Lua começa a diminuir sua luminosidade após a Lua Cheia, iluminando gradualmente seu lado esquerdo.",
-  },
+  { id: "new", name: "Lua Nova", description: "A Lua Nova ocorre quando a Lua está entre a Terra e o Sol. Ela não é visível da Terra e marca o início de um novo ciclo lunar." },
+  { id: "waxing", name: "Crescente", description: "Durante a fase Crescente, a Lua começa a se tornar visível após a Lua Nova, iluminando gradualmente seu lado direito." },
+  { id: "full", name: "Lua Cheia", description: "A Lua Cheia ocorre quando a Lua está totalmente iluminada pelo Sol e é visível como um círculo completo no céu noturno." },
+  { id: "waning", name: "Minguante", description: "Na fase Minguante, a Lua começa a diminuir sua luminosidade após a Lua Cheia, iluminando gradualmente seu lado esquerdo." },
 ];
 
-export default function MoonExperience() {
+export default function MoonCard() {
   const rotation = useRef(new Animated.Value(0)).current;
   const [selectedPhase, setSelectedPhase] = useState(moonPhases[0]);
 
-  // rotação infinita da lua
+  // rotação contínua da lua
   useEffect(() => {
     const animate = () => {
       rotation.setValue(0);
@@ -55,32 +33,28 @@ export default function MoonExperience() {
   });
 
   return (
-    <ScrollView className="flex-1 bg-background-dark px-4 pt-16 mt-4">
+    <View className="px-4 mt-6">
+      {/* Título animado */}
       <MotiView
         from={{ opacity: 0, translateY: 20 }}
         animate={{ opacity: 1, translateY: 0 }}
         transition={{ type: "timing", duration: 500 }}
       >
-        <Text className="text-white font-bodyBold text-2xl tracking-wide mx-auto mb-8 bg-primary px-4 py-1 rounded-3xl">
+        <Text className="text-white font-bodyBold text-2xl tracking-wide mx-auto mb-4 bg-primary px-4 py-1 rounded-3xl">
           Acompanhe a Lua
         </Text>
       </MotiView>
 
-      <View className="w-full items-center relative h-96 justify-center">
-        <MotiView
-          from={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1.2, opacity: 0.2 }}
-          transition={{ type: "timing", loop: true, duration: 3000 }}
-          className="absolute w-80 h-80 rounded-full bg-white/20 blur-2xl"
-        />
-        
+      {/* Lua animada */}
+      <View className="w-full items-center relative h-80 justify-center">
         <MotiView
           from={{ scale: 0.9, opacity: 0.1 }}
-          animate={{ scale: 1.1, opacity: 0.3 }}
-          transition={{ type: "timing", loop: true, duration: 4000, delay: 500 }}
+          animate={{ scale: 1.05, opacity: 0.25 }}
+          transition={{ type: "timing", loop: true, duration: 3500 }}
           className="absolute w-64 h-64 rounded-full bg-white/10 blur-xl"
         />
 
+        {/* LottieView renderizado apenas uma vez */}
         <Animated.View style={{ transform: [{ rotate: rotateInterpolate }] }}>
           <LottieView
             source={require("../../assets/animations/Moon.json")}
@@ -91,6 +65,7 @@ export default function MoonExperience() {
         </Animated.View>
       </View>
 
+      {/* Seleção de fases */}
       <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mt-6 mb-4">
         {moonPhases.map((phase) => (
           <Pressable key={phase.id} onPress={() => setSelectedPhase(phase)}>
@@ -108,8 +83,9 @@ export default function MoonExperience() {
         ))}
       </ScrollView>
 
+      {/* Card da fase selecionada */}
       <MotiView
-        from={{ opacity: 0, translateY: 20 }}
+        from={{ opacity: 0, translateY: 10 }}
         animate={{ opacity: 1, translateY: 0 }}
         transition={{ type: "timing", duration: 400 }}
         className="bg-gradient-to-br from-[#2E2C50] to-[#0B0530] p-6 rounded-3xl shadow-lg"
@@ -117,6 +93,6 @@ export default function MoonExperience() {
         <Text className="text-white text-2xl font-title mb-2">{selectedPhase.name}</Text>
         <Text className="text-gray-300 text-base leading-relaxed">{selectedPhase.description}</Text>
       </MotiView>
-    </ScrollView>
+    </View>
   );
 }

@@ -17,6 +17,8 @@ export default function ImageCarousel() {
   const [index, setIndex] = useState(0);
 
   const fadeInAnim = useRef(new Animated.Value(0)).current;
+
+  // Fade-in da primeira imagem
   useEffect(() => {
     Animated.timing(fadeInAnim, {
       toValue: 1,
@@ -26,7 +28,6 @@ export default function ImageCarousel() {
   }, []);
 
   function CarouselItem({ item, i }: any) {
-    // Opacidade baseada no scroll
     const opacity = scrollX.interpolate({
       inputRange: [(i - 1) * width, i * width, (i + 1) * width],
       outputRange: [0.5, 1, 0.5],
@@ -37,7 +38,7 @@ export default function ImageCarousel() {
       <Animated.View
         style={{
           width: width - 32,
-          opacity: i === 0 ? Animated.multiply(fadeInAnim, opacity) : opacity,
+          opacity: i === 0 ? Animated.multiply(fadeInAnim, opacity) : opacity, // só a primeira imagem recebe fade-in
         }}
         className="mx-4 rounded-3xl overflow-hidden"
       >
@@ -46,7 +47,6 @@ export default function ImageCarousel() {
 
         <View className="absolute inset-0 flex-row items-end justify-between p-5">
           <Text className="text-white text-2xl font-title max-w-[70%]">{item.title}</Text>
-
           <Pressable onPress={() => router.push(item.route)}>
             <View className="bg-primary p-3 rounded-full">
               <Ionicons name="arrow-forward" size={20} color="#0b0530" />
@@ -74,6 +74,7 @@ export default function ImageCarousel() {
         onMomentumScrollEnd={(e) => setIndex(Math.round(e.nativeEvent.contentOffset.x / width))}
       />
 
+      {/* Indicadores */}
       <View className="flex-row justify-center mt-3">
         {images.map((_, i) => {
           const widthAnim = i === index ? 16 : 8;

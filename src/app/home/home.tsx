@@ -3,13 +3,15 @@ import HeaderMenu from "@/src/components/headerMenu";
 import ImageCarousel from "@/src/components/imageCarousel";
 import PlanetCarousel from "@/src/components/planetCarousel";
 import MoonCard from "@/src/components/moonCard";
-import { ScrollView, Text, View } from "react-native";
-import TextTicker from "react-native-text-ticker";
+import MarqueeTicker from "@/src/components/marqueeTicker";
+import { ScrollView, Text } from "react-native";
 import { MotiView } from "moti";
 
 export default function HomeScreen() {
   return (
-    <ScrollView className="flex-1 bg-background-darkblue mb-10">
+    <ScrollView className="flex-1 bg-background-darkblue">
+
+      {/* Header Menu */}
       <MotiView
         from={{ opacity: 0, translateY: -20 }}
         animate={{ opacity: 1, translateY: 0 }}
@@ -18,68 +20,29 @@ export default function HomeScreen() {
         <HeaderMenu />
       </MotiView>
 
-      <MotiView
-        from={{ opacity: 0, translateY: 20 }}
-        animate={{ opacity: 1, translateY: 0 }}
-        transition={{ type: "timing", duration: 500, delay: 200 }}
-      >
-        <View className="ml-4 mt-6 bg-secondary px-3 py-1 rounded-3xl overflow-hidden">
-          <TextTicker
-            duration={9000}
-            loop
-            repeatSpacer={60}
-            marqueeDelay={800}
-            className="font-title text-text-light text-3xl"
-          >
-            Bem vindo, viajante ✨ Explore o universo! ✨
-          </TextTicker>
-        </View>
-      </MotiView>
+      {/* Marquee */}
+      <MarqueeTicker text="Bem vindo, viajante ✨ Explore o universo! ✨" />
 
+      {/* Subtítulo */}
       <MotiView
         from={{ opacity: 0, translateY: 20 }}
         animate={{ opacity: 1, translateY: 0 }}
-        transition={{ type: "timing", duration: 500, delay: 400 }}
+        transition={{ type: "timing", duration: 500, delay: 300 }}
       >
         <Text className="ml-4 mt-2 text-text-purple font-body">
           Pronto para descobrir novos horizontes?
         </Text>
       </MotiView>
 
-      <MotiView
-        from={{ opacity: 0, translateY: 30 }}
-        animate={{ opacity: 1, translateY: 0 }}
-        transition={{ type: "timing", duration: 500, delay: 600 }}
-      >
-        <ImageCarousel />
-      </MotiView>
+      {/* Componentes */}
+      <ImageCarousel />
+      <Text className="text-white font-bodyBold text-xl tracking-wide ml-4 mt-4">
+        Fato do dia
+      </Text>
+      <DailyFact />
+      <PlanetCarousel />
+      <MoonCard />
 
-      <MotiView
-        from={{ opacity: 0, translateY: 20 }}
-        animate={{ opacity: 1, translateY: 0 }}
-        transition={{ type: "timing", duration: 500, delay: 800 }}
-      >
-        <Text className="text-white font-bodyBold text-xl tracking-wide ml-4 mt-4">
-          Fato do dia
-        </Text>
-        <DailyFact />
-      </MotiView>
-
-      <MotiView
-        from={{ opacity: 0, translateY: 30 }}
-        animate={{ opacity: 1, translateY: 0 }}
-        transition={{ type: "timing", duration: 500, delay: 1000 }}
-      >
-        <PlanetCarousel />
-      </MotiView>
-
-      <MotiView
-        from={{ opacity: 0, translateY: 30 }}
-        animate={{ opacity: 1, translateY: 0 }}
-        transition={{ type: "timing", duration: 500, delay: 1400 }}
-      >
-        <MoonCard />
-      </MotiView>
     </ScrollView>
   );
 }
