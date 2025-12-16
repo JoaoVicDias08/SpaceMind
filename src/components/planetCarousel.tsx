@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { MotiView } from "moti";
+import { LinearGradient } from "expo-linear-gradient";
 
 const { width } = Dimensions.get("window");
 
@@ -136,62 +137,76 @@ export default function PlanetCarousel() {
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
-          <View style={{ width }} className="items-center px-6">
+          <View style={{ width }} className="px-6 mt-10">
             <MotiView
-              from={{ opacity: 0, translateY: 20 }}
+              from={{ opacity: 0, translateY: 24 }}
               animate={{ opacity: 1, translateY: 0 }}
-              transition={{ type: "timing", duration: 400 }}
-              className="bg-black rounded-3xl p-6 w-full h-[560px] border border-white/10 mt-6 justify-between"
+              transition={{ duration: 500 }}
             >
-              {/* IMAGEM */}
-              <View className="items-center">
-                <View className="w-56 h-56">
-                  <Image
-                    source={item.image}
-                    resizeMode="contain"
-                    className="w-full h-full"
-                  />
-                </View>
-              </View>
-
-              <View>
-                <Text className="text-white text-3xl font-title text-center">
-                  {item.name}
-                </Text>
-
-                <Text className="text-gray-400 text-sm text-center mt-2">
-                  {item.type}
-                </Text>
-
-                <Text className="text-gray-300 text-base text-center mt-4 leading-relaxed">
-                  {item.description}
-                </Text>
-              </View>
-
-              <Pressable onPress={() => setSelectedPlanet(item)}>
-                {({ pressed }) => (
+              <LinearGradient
+                colors={["#0B0530", "#120845", "#1A0B5E"]}
+                style={{
+                  borderRadius: 28,
+                  padding: 24,
+                  borderWidth: 1,
+                  borderColor: "rgba(255,255,255,0.08)",
+                  height: 560,
+                  justifyContent: "space-between",
+                }}
+              >
+                <View className="items-center">
                   <MotiView
-                    animate={{ scale: pressed ? 0.95 : 1 }}
-                    transition={{ type: "timing", duration: 120 }}
-                    className="bg-blue-600 py-3 rounded-xl flex-row items-center justify-center gap-2 mt-4"
+                    from={{ scale: 0.85, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 500 }}
+                    className="w-64 h-64"
                   >
-                    <Ionicons
-                      name="information-circle-outline"
-                      size={22}
-                      color="#fff"
+                    <Image
+                      source={item.image}
+                      resizeMode="contain"
+                      className="w-full h-full"
                     />
-                    <Text className="text-white font-body text-lg">
-                      Ver detalhes
-                    </Text>
                   </MotiView>
-                )}
-              </Pressable>
+                </View>
+
+                <View>
+                  <Text className="text-white text-3xl font-title text-center">
+                    {item.name}
+                  </Text>
+
+                  <Text className="text-text-purple text-sm text-center mt-1">
+                    {item.type}
+                  </Text>
+
+                  <Text className="text-gray-300 text-base text-center mt-4 leading-relaxed">
+                    {item.description}
+                  </Text>
+                </View>
+
+                <Pressable onPress={() => setSelectedPlanet(item)}>
+                  {({ pressed }) => (
+                    <MotiView
+                      animate={{ scale: pressed ? 0.95 : 1 }}
+                      transition={{ duration: 120 }}
+                      className="bg-primary py-3 rounded-2xl flex-row items-center justify-center gap-2 mt-4"
+                    >
+                      <Ionicons
+                        name="planet-outline"
+                        size={22}
+                        color="#fff"
+                      />
+                      <Text className="text-white font-bodyBold text-lg">
+                        Ver detalhes
+                      </Text>
+                    </MotiView>
+                  )}
+                </Pressable>
+              </LinearGradient>
             </MotiView>
           </View>
         )}
       />
 
-      {/* MODAL SEM ANIMAÇÕES */}
       <Modal visible={!!selectedPlanet} transparent animationType="fade">
         <Pressable
           className="flex-1 bg-black/80 items-center justify-center px-6"
@@ -199,10 +214,10 @@ export default function PlanetCarousel() {
         >
           <Pressable
             onPress={() => {}}
-            className="bg-background-darkblue rounded-2xl p-6 w-full border border-white/10"
+            className="bg-background-darkblue rounded-3xl p-6 w-full border border-white/10"
           >
             <View className="items-center mb-4">
-              <View className="w-40 h-40">
+              <View className="w-44 h-44">
                 <Image
                   source={selectedPlanet?.image}
                   resizeMode="contain"
@@ -211,31 +226,33 @@ export default function PlanetCarousel() {
               </View>
             </View>
 
-            <Text className="text-white text-2xl font-title text-center mb-4">
+            <Text className="text-white text-2xl font-title text-center mb-6">
               {selectedPlanet?.name}
             </Text>
 
-            <Text className="text-text-light mb-2">
-              Diâmetro: {selectedPlanet?.diameter}
-            </Text>
-            <Text className="text-text-light mb-2">
-              Distância da Terra: {selectedPlanet?.distance}
-            </Text>
-            <Text className="text-text-light mb-2">
-              Número de luas: {selectedPlanet?.moons}
-            </Text>
-            <Text className="text-text-light mb-4">
-              Ano de descoberta: {selectedPlanet?.discovery}
-            </Text>
+            <View className="gap-2 mb-6">
+              <Text className="text-text-light">
+                🌍 Diâmetro: {selectedPlanet?.diameter}
+              </Text>
+              <Text className="text-text-light">
+                📏 Distância da Terra: {selectedPlanet?.distance}
+              </Text>
+              <Text className="text-text-light">
+                🌕 Número de luas: {selectedPlanet?.moons}
+              </Text>
+              <Text className="text-text-light">
+                🛰 Descoberta: {selectedPlanet?.discovery}
+              </Text>
+            </View>
 
             <Pressable onPress={() => setSelectedPlanet(null)}>
               {({ pressed }) => (
                 <MotiView
                   animate={{ scale: pressed ? 0.95 : 1 }}
-                  transition={{ type: "timing", duration: 120 }}
-                  className="bg-blue-600 py-3 rounded-xl items-center mt-2"
+                  transition={{ duration: 120 }}
+                  className="bg-primary py-3 rounded-xl items-center"
                 >
-                  <Text className="text-white font-body text-lg">
+                  <Text className="text-white font-bodyBold text-lg">
                     Fechar
                   </Text>
                 </MotiView>

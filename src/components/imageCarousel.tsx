@@ -1,14 +1,38 @@
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useEffect, useRef, useState } from "react";
-import { Animated, Dimensions, FlatList, Image, Pressable, Text, View } from "react-native";
+import {
+  Animated,
+  Dimensions,
+  FlatList,
+  Image,
+  Pressable,
+  Text,
+  View,
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const { width } = Dimensions.get("window");
 
 const images = [
-  { id: "1", source: require("../../assets/images/solarSystemImage.jpg"), title: "Nosso Sistema Solar", route: "/home/solar" },
-  { id: "2", source: require("../../assets/images/galaxyImage.jpg"), title: "Galáxias Distantes", route: "/home/galaxy" },
-  { id: "3", source: require("../../assets/images/moonImage.jpg"), title: "A Lua", route: "/home/moon" },
+  {
+    id: "1",
+    source: require("../../assets/images/solarSystemImage.jpg"),
+    title: "Nosso Sistema Solar",
+    route: "/home/solar",
+  },
+  {
+    id: "2",
+    source: require("../../assets/images/galaxyImage.jpg"),
+    title: "Galáxias Distantes",
+    route: "/home/galaxy",
+  },
+  {
+    id: "3",
+    source: require("../../assets/images/moonImage.jpg"),
+    title: "A Lua",
+    route: "/home/moon",
+  },
 ];
 
 export default function ImageCarousel() {
@@ -16,40 +40,71 @@ export default function ImageCarousel() {
   const scrollX = useRef(new Animated.Value(0)).current;
   const [index, setIndex] = useState(0);
 
-  const fadeInAnim = useRef(new Animated.Value(0)).current;
+  const entryOpacity = useRef(new Animated.Value(0)).current;
+  const entryTranslate = useRef(new Animated.Value(20)).current;
 
-  // Fade-in da primeira imagem
   useEffect(() => {
-    Animated.timing(fadeInAnim, {
-      toValue: 1,
-      duration: 600,
-      useNativeDriver: true,
-    }).start();
+    Animated.parallel([
+      Animated.timing(entryOpacity, {
+        toValue: 1,
+        duration: 600,
+        useNativeDriver: true,
+      }),
+      Animated.timing(entryTranslate, {
+        toValue: 0,
+        duration: 600,
+        useNativeDriver: true,
+      }),
+    ]).start();
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const nextIndex = (index + 1) % images.length;
+      flatListRef.current?.scrollToOffset({
+        offset: nextIndex * width,
+        animated: true,
+      });
+      setIndex(nextIndex);
+    }, 4500);
+
+    return () => clearInterval(interval);
+  }, [index]);
 
   function CarouselItem({ item, i }: any) {
     const opacity = scrollX.interpolate({
       inputRange: [(i - 1) * width, i * width, (i + 1) * width],
-      outputRange: [0.5, 1, 0.5],
-      extrapolate: 'clamp',
+      outputRange: [0.6, 1, 0.6],
+      extrapolate: "clamp",
     });
 
     return (
       <Animated.View
         style={{
           width: width - 32,
-          opacity: i === 0 ? Animated.multiply(fadeInAnim, opacity) : opacity, // só a primeira imagem recebe fade-in
+          opacity,
         }}
         className="mx-4 rounded-3xl overflow-hidden"
       >
-        <Image source={item.source} className="w-full h-60" resizeMode="cover" />
-        <View className="absolute inset-0 bg-black/30" />
+        <Image
+          source={item.source}
+          className="w-full h-60"
+          resizeMode="cover"
+        />
+
+        <LinearGradient
+          colors={["transparent", "rgba(0,0,0,0.65)"]}
+          style={{ position: "absolute", inset: 0 }}
+        />
 
         <View className="absolute inset-0 flex-row items-end justify-between p-5">
-          <Text className="text-white text-2xl font-title max-w-[70%]">{item.title}</Text>
+          <Text className="text-white text-2xl font-title max-w-[70%]">
+            {item.title}
+          </Text>
+
           <Pressable onPress={() => router.push(item.route)}>
-            <View className="bg-primary p-3 rounded-full">
-              <Ionicons name="arrow-forward" size={20} color="#0b0530" />
+            <View className="bg-white/90 p-3 rounded-full">
+              <Ionicons name="arrow-forward" size={20} color="#0B0530" />
             </View>
           </Pressable>
         </View>
@@ -58,7 +113,13 @@ export default function ImageCarousel() {
   }
 
   return (
-    <View className="mt-4">
+    <Animated.View
+      style={{
+        opacity: entryOpacity,
+        transform: [{ translateY: entryTranslate }],
+      }}
+      className="mt-4"
+    >
       <Animated.FlatList
         ref={flatListRef}
         data={images}
@@ -66,22 +127,54 @@ export default function ImageCarousel() {
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id}
-        renderItem={({ item, index: i }) => <CarouselItem item={item} i={i} />}
+        renderItem={({ item, index: i }) => (
+          <CarouselItem item={item} i={i} />
+        )}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { x: scrollX } } }],
           { useNativeDriver: true }
         )}
-        onMomentumScrollEnd={(e) => setIndex(Math.round(e.nativeEvent.contentOffset.x / width))}
+        onMomentumScrollEnd={(e) =>
+          setIndex(Math.round(e.nativeEvent.contentOffset.x / width))
+        }
       />
 
-      {/* Indicadores */}
-      <View className="flex-row justify-center mt-3">
+      <View className="flex-row justify-center mt-4">
         {images.map((_, i) => {
-          const widthAnim = i === index ? 16 : 8;
-          const bgColor = i === index ? '#fff' : 'rgba(255,255,255,0.4)';
-          return <View key={i} style={{ width: widthAnim, height: 8, borderRadius: 4, marginHorizontal: 4, backgroundColor: bgColor }} />;
+          const inputRange = [
+            (i - 1) * width,
+            i * width,
+            (i + 1) * width,
+          ];
+
+          const scaleX = scrollX.interpolate({
+            inputRange,
+            outputRange: [1, 2.4, 1],
+            extrapolate: "clamp",
+          });
+
+          const opacity = scrollX.interpolate({
+            inputRange,
+            outputRange: [0.4, 1, 0.4],
+            extrapolate: "clamp",
+          });
+
+          return (
+            <Animated.View
+              key={i}
+              style={{
+                transform: [{ scaleX }],
+                opacity,
+                width: 8,
+                height: 8,
+                borderRadius: 4,
+                marginHorizontal: 6,
+                backgroundColor: "#FFFFFF",
+              }}
+            />
+          );
         })}
       </View>
-    </View>
+    </Animated.View>
   );
 }
