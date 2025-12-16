@@ -1,10 +1,10 @@
-import { View, Text, Image, Pressable } from "react-native";
+import FormInput from "@/src/components/shared/formInput";
 import { Ionicons } from "@expo/vector-icons";
-import FormInput from "@/src/components/formInput";
-import { useState } from "react";
 import { router } from "expo-router";
 import { MotiView } from "moti";
 import { MotiPressable } from "moti/interactions";
+import { useState } from "react";
+import { Image, Pressable, Text, View } from "react-native";
 
 export default function Login() {
   const [email, setEmail] = useState("");

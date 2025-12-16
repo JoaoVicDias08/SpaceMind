@@ -1,12 +1,13 @@
-import DailyFact from "@/src/components/dailyFact";
-import HeaderMenu from "@/src/components/headerMenu";
-import ImageCarousel from "@/src/components/imageCarousel";
-import PlanetCarousel from "@/src/components/planetCarousel";
-import MoonCard from "@/src/components/moonCard";
-import MarqueeTicker from "@/src/components/marqueeTicker";
-import GalaxyPreview from "@/src/components/galaxyPreview";
 import { ScrollView, Text } from "react-native";
 import { MotiView } from "moti";
+
+import DailyFact from "@/src/components/homeComponents/dailyFact";
+import HeaderMenu from "@/src/components/homeComponents/headerMenu";
+import ImageCarousel from "@/src/components/homeComponents/imageCarousel";
+import PlanetCarousel from "@/src/components/homeComponents/planetCarousel";
+import MoonCard from "@/src/components/homeComponents/moonCard";
+import MarqueeTicker from "@/src/components/homeComponents/marqueeTicker";
+import GalaxyPreview from "@/src/components/homeComponents/galaxyPreview";
 
 export default function HomeScreen() {
   return (
@@ -27,7 +28,7 @@ export default function HomeScreen() {
         animate={{ opacity: 1, translateY: 0 }}
         transition={{ type: "timing", duration: 500, delay: 300 }}
       >
-        <Text className="ml-4 mt-2 text-text-purple font-body">
+        <Text className="ml-4 mt-2 text-text-purple font-body text-xl">
           Pronto para descobrir novos horizontes?
         </Text>
       </MotiView>

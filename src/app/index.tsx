@@ -1,10 +1,10 @@
-import { Text, View, Image, Pressable } from "react-native";
-import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { GradientTitle } from "../components/gradientTitle";
+import { router } from "expo-router";
 import LottieView from "lottie-react-native";
 import { MotiView } from "moti";
 import { useState } from "react";
+import { Image, Pressable, Text, View } from "react-native";
+import { GradientTitle } from "../components/shared/gradientTitle";
 
 export default function Index() {
   const [pressed, setPressed] = useState(false);

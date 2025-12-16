@@ -15,7 +15,7 @@ export const galaxies: GalaxyItem[] = [
     name: "Espiral",
     example: "Via Láctea",
     description: "Braços em espiral com intensa formação estelar.",
-    image: require("../../assets/galaxies/spiral.jpg"),
+    image: require("../../assets/galaxiesImages/spiral.jpg"),
     color: "#7C6CFF",
   },
   {
@@ -23,7 +23,7 @@ export const galaxies: GalaxyItem[] = [
     name: "Elíptica",
     example: "Messier 87",
     description: "Formato oval, estrelas antigas e pouco gás.",
-    image: require("../../assets/galaxies/elliptical.jpg"),
+    image: require("../../assets/galaxiesImages/elliptical.jpg"),
     color: "#FF6FD8",
   },
   {
@@ -31,7 +31,7 @@ export const galaxies: GalaxyItem[] = [
     name: "Irregular",
     example: "Grande Nuvem de Magalhães",
     description: "Sem forma definida, comum após colisões.",
-    image: require("../../assets/galaxies/irregular.jpg"),
+    image: require("../../assets/galaxiesImages/irregular.jpg"),
     color: "#4FD1C5",
   },
   {
@@ -39,7 +39,7 @@ export const galaxies: GalaxyItem[] = [
     name: "Lenticular",
     example: "NGC 5866",
     description: "Transição entre espiral e elíptica.",
-    image: require("../../assets/galaxies/lenticular.jpg"),
+    image: require("../../assets/galaxiesImages/lenticular.jpg"),
     color: "#F6AD55",
   },
 ];

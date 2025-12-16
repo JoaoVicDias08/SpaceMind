@@ -1,11 +1,11 @@
-import { View, Text, Pressable } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import FormInput from "@/src/components/shared/formInput";
 import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
-import FormInput from "@/src/components/formInput";
-import { useState } from "react";
 import { MotiView } from "moti";
 import { MotiPressable } from "moti/interactions";
+import { useState } from "react";
+import { Pressable, Text, View } from "react-native";
 
 export default function Cadastro() {
   const [name, setName] = useState("");

@@ -12,7 +12,7 @@ export type TabItem = {
 
 export const tabs: TabItem[] = [
   { name: "Home", route: "/home/home", icon: "home" },
-  { name: "Galáxia", route: "/home/galaxy", icon: "compass" },
+  { name: "Galáxia", route: "/home/galaxies", icon: "compass" },
   { name: "Curiosidades", route: "/home/others", icon: "newspaper" },
   { name: "Sobre", route: "/home/about", icon: "information-circle" },
 ];
