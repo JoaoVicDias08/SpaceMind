@@ -42,7 +42,7 @@ export default function HeaderGalaxies({ onSearch }: HeaderGalaxiesProps) {
       from={{ opacity: 0, translateY: -20 }}
       animate={{ opacity: 1, translateY: 0 }}
       transition={{ type: "timing", duration: 600 }}
-      className="bg-background-darkblue mt-12 pb-1 p-4"
+      className="bg-background-darkblue mt-8 pb-1 p-4"
     >
       <View className="flex-row items-center justify-between">
         <TextInput

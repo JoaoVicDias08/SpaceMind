@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { useState } from "react";
 
 import GalaxiesSection from "@/src/components/galaxiesComponents/galaxiesSection";
-import HeaderGalaxies from "../../components/galaxiesComponents/headerGalaxies";
+import HeaderGalaxies from "@/src/components/galaxiesComponents/headerGalaxies";
 import { GalaxyCard, galaxiesCards } from "@/src/data/galaxiesCards";
 
 export default function Galaxies() {
@@ -10,16 +10,20 @@ export default function Galaxies() {
 
   return (
     <View className="flex-1 bg-background-darkblue">
-      <HeaderGalaxies
-        onSearch={(galaxyName: string) => {
-          // procurar a galáxia pelo nome
-          const found = galaxiesCards.find(
-            (g) => g.nome.toLowerCase() === galaxyName.toLowerCase()
-          );
-          if (found) setSelectedGalaxy(found);
-        }}
+      <GalaxiesSection
+        selectedGalaxy={selectedGalaxy}
+        onSelectGalaxy={setSelectedGalaxy}
+        HeaderComponent={
+          <HeaderGalaxies
+            onSearch={(galaxyName: string) => {
+              const found = galaxiesCards.find(
+                (g) => g.nome.toLowerCase() === galaxyName.toLowerCase()
+              );
+              if (found) setSelectedGalaxy(found);
+            }}
+          />
+        }
       />
-      <GalaxiesSection selectedGalaxy={selectedGalaxy} onSelectGalaxy={setSelectedGalaxy} />
     </View>
   );
 }
