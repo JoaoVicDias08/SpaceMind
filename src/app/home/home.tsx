@@ -4,6 +4,7 @@ import ImageCarousel from "@/src/components/imageCarousel";
 import PlanetCarousel from "@/src/components/planetCarousel";
 import MoonCard from "@/src/components/moonCard";
 import MarqueeTicker from "@/src/components/marqueeTicker";
+import GalaxyPreview from "@/src/components/galaxyPreview";
 import { ScrollView, Text } from "react-native";
 import { MotiView } from "moti";
 
@@ -11,7 +12,6 @@ export default function HomeScreen() {
   return (
     <ScrollView className="flex-1 bg-background-darkblue">
 
-      {/* Header Menu */}
       <MotiView
         from={{ opacity: 0, translateY: -20 }}
         animate={{ opacity: 1, translateY: 0 }}
@@ -20,10 +20,8 @@ export default function HomeScreen() {
         <HeaderMenu />
       </MotiView>
 
-      {/* Marquee */}
       <MarqueeTicker text="Bem vindo, viajante ✨ Explore o universo! ✨" />
 
-      {/* Subtítulo */}
       <MotiView
         from={{ opacity: 0, translateY: 20 }}
         animate={{ opacity: 1, translateY: 0 }}
@@ -34,7 +32,6 @@ export default function HomeScreen() {
         </Text>
       </MotiView>
 
-      {/* Componentes */}
       <ImageCarousel />
       <Text className="text-white font-bodyBold text-xl tracking-wide ml-4 mt-4">
         Fato do dia
@@ -42,6 +39,7 @@ export default function HomeScreen() {
       <DailyFact />
       <PlanetCarousel />
       <MoonCard />
+      <GalaxyPreview />
 
     </ScrollView>
   );
