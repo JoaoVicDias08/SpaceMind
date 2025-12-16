@@ -8,7 +8,6 @@ import {
   Pressable,
   Modal,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 import { MotiView } from "moti";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -32,82 +31,76 @@ const planets: Planet[] = [
     name: "Mercúrio",
     type: "Rochoso",
     description:
-      "Mercúrio é o planeta mais próximo do Sol e o menor do Sistema Solar, com grandes variações de temperatura.",
+      "Mercúrio é o planeta mais próximo do Sol e o menor do Sistema Solar.",
     image: require("../../assets/planets/mercury.jpg"),
-    diameter: "4.879 km",
-    distance: "77 milhões km",
+    diameter: "4879",
+    distance: "77",
     moons: "0",
-    discovery: "Conhecido desde a Antiguidade",
+    discovery: "Antiguidade",
   },
   {
     id: "2",
     name: "Vênus",
-    type: "Rochoso • Atmosfera densa",
-    description:
-      "Vênus é o planeta mais quente do Sistema Solar devido ao intenso efeito estufa.",
+    type: "Rochoso",
+    description: "Vênus é o planeta mais quente do Sistema Solar.",
     image: require("../../assets/planets/venus.jpg"),
-    diameter: "12.104 km",
-    distance: "38 milhões km",
+    diameter: "12104",
+    distance: "38",
     moons: "0",
-    discovery: "Conhecido desde a Antiguidade",
+    discovery: "Antiguidade",
   },
   {
     id: "3",
     name: "Terra",
-    type: "Rochoso • Habitável",
-    description:
-      "A Terra é o único planeta conhecido que abriga vida e possui água líquida.",
+    type: "Habitável",
+    description: "Único planeta conhecido por abrigar vida.",
     image: require("../../assets/planets/earth.jpg"),
-    diameter: "12.742 km",
-    distance: "0 km",
+    diameter: "12742",
+    distance: "0",
     moons: "1",
     discovery: "—",
   },
   {
     id: "4",
     name: "Marte",
-    type: "Rochoso • Frio",
-    description:
-      "Marte é conhecido como o planeta vermelho e abriga a maior montanha do Sistema Solar.",
+    type: "Rochoso",
+    description: "Conhecido como o planeta vermelho.",
     image: require("../../assets/planets/mars.jpg"),
-    diameter: "6.779 km",
-    distance: "225 milhões km",
+    diameter: "6779",
+    distance: "225",
     moons: "2",
-    discovery: "Conhecido desde a Antiguidade",
+    discovery: "Antiguidade",
   },
   {
     id: "5",
     name: "Júpiter",
     type: "Gasoso",
-    description:
-      "Júpiter é o maior planeta do Sistema Solar e possui uma gigantesca tempestade.",
+    description: "O maior planeta do Sistema Solar.",
     image: require("../../assets/planets/jupiter.jpg"),
-    diameter: "139.820 km",
-    distance: "628 milhões km",
+    diameter: "139820",
+    distance: "778",
     moons: "95",
-    discovery: "Conhecido desde a Antiguidade",
+    discovery: "Antiguidade",
   },
   {
     id: "6",
     name: "Saturno",
-    type: "Gasoso • Anéis",
-    description:
-      "Saturno se destaca por seus anéis compostos de gelo e rochas.",
+    type: "Gasoso",
+    description: "Famoso por seus anéis impressionantes.",
     image: require("../../assets/planets/saturn.jpg"),
-    diameter: "116.460 km",
-    distance: "1,2 bilhões km",
+    diameter: "116460",
+    distance: "1427",
     moons: "146",
-    discovery: "Conhecido desde a Antiguidade",
+    discovery: "Antiguidade",
   },
   {
     id: "7",
     name: "Urano",
     type: "Gigante de gelo",
-    description:
-      "Urano gira praticamente de lado e possui coloração azul-esverdeada.",
+    description: "Gira de lado em relação aos outros planetas.",
     image: require("../../assets/planets/uranus.jpg"),
-    diameter: "50.724 km",
-    distance: "2,6 bilhões km",
+    diameter: "50724",
+    distance: "2871",
     moons: "27",
     discovery: "1781",
   },
@@ -115,11 +108,10 @@ const planets: Planet[] = [
     id: "8",
     name: "Netuno",
     type: "Gigante de gelo",
-    description:
-      "Netuno é o planeta mais distante do Sol e possui os ventos mais rápidos.",
+    description: "O planeta mais distante do Sol.",
     image: require("../../assets/planets/neptune.jpg"),
-    diameter: "49.244 km",
-    distance: "4,3 bilhões km",
+    diameter: "49244",
+    distance: "4495",
     moons: "14",
     discovery: "1846",
   },
@@ -148,58 +140,39 @@ export default function PlanetCarousel() {
                 style={{
                   borderRadius: 28,
                   padding: 24,
-                  borderWidth: 1,
-                  borderColor: "rgba(255,255,255,0.08)",
                   height: 560,
                   justifyContent: "space-between",
                 }}
               >
                 <View className="items-center">
-                  <MotiView
-                    from={{ scale: 0.85, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 500 }}
-                    className="w-64 h-64"
-                  >
-                    <Image
-                      source={item.image}
-                      resizeMode="contain"
-                      className="w-full h-full"
-                    />
-                  </MotiView>
+                  <Image
+                    source={item.image}
+                    resizeMode="contain"
+                    className="w-56 h-56"
+                  />
                 </View>
 
                 <View>
                   <Text className="text-white text-3xl font-title text-center">
                     {item.name}
                   </Text>
-
-                  <Text className="text-text-purple text-sm text-center mt-1">
+                  <Text className="text-gray-400 text-center mt-1">
                     {item.type}
                   </Text>
-
-                  <Text className="text-gray-300 text-base text-center mt-4 leading-relaxed">
+                  <Text
+                    className="text-gray-300 text-center mt-3 text-sm"
+                    numberOfLines={2}
+                  >
                     {item.description}
                   </Text>
                 </View>
 
                 <Pressable onPress={() => setSelectedPlanet(item)}>
-                  {({ pressed }) => (
-                    <MotiView
-                      animate={{ scale: pressed ? 0.95 : 1 }}
-                      transition={{ duration: 120 }}
-                      className="bg-primary py-3 rounded-2xl flex-row items-center justify-center gap-2 mt-4"
-                    >
-                      <Ionicons
-                        name="planet-outline"
-                        size={22}
-                        color="#fff"
-                      />
-                      <Text className="text-white font-bodyBold text-lg">
-                        Ver detalhes
-                      </Text>
-                    </MotiView>
-                  )}
+                  <View className="bg-primary py-3 rounded-2xl items-center">
+                    <Text className="text-white font-bodyBold">
+                      Ver detalhes
+                    </Text>
+                  </View>
                 </Pressable>
               </LinearGradient>
             </MotiView>
@@ -208,58 +181,76 @@ export default function PlanetCarousel() {
       />
 
       <Modal visible={!!selectedPlanet} transparent animationType="fade">
-        <Pressable
-          className="flex-1 bg-black/80 items-center justify-center px-6"
-          onPress={() => setSelectedPlanet(null)}
-        >
-          <Pressable
-            onPress={() => {}}
-            className="bg-background-darkblue rounded-3xl p-6 w-full border border-white/10"
-          >
-            <View className="items-center mb-4">
-              <View className="w-44 h-44">
-                <Image
-                  source={selectedPlanet?.image}
-                  resizeMode="contain"
-                  className="w-full h-full"
-                />
-              </View>
-            </View>
+        <View className="flex-1 bg-black/90 items-center justify-center px-6">
+          {selectedPlanet && (
+            <View className="bg-background-darkblue rounded-3xl p-6 w-full">
+              <Image
+                source={selectedPlanet.image}
+                resizeMode="contain"
+                className="w-40 h-40 self-center mb-4"
+              />
 
-            <Text className="text-white text-2xl font-title text-center mb-6">
-              {selectedPlanet?.name}
-            </Text>
+              <Text className="text-white text-2xl font-title text-center mb-1">
+                {selectedPlanet.name}
+              </Text>
 
-            <View className="gap-2 mb-6">
-              <Text className="text-text-light">
-                🌍 Diâmetro: {selectedPlanet?.diameter}
+              <Text className="text-gray-400 text-center mb-4">
+                {selectedPlanet.type}
               </Text>
-              <Text className="text-text-light">
-                📏 Distância da Terra: {selectedPlanet?.distance}
-              </Text>
-              <Text className="text-text-light">
-                🌕 Número de luas: {selectedPlanet?.moons}
-              </Text>
-              <Text className="text-text-light">
-                🛰 Descoberta: {selectedPlanet?.discovery}
-              </Text>
-            </View>
 
-            <Pressable onPress={() => setSelectedPlanet(null)}>
-              {({ pressed }) => (
-                <MotiView
-                  animate={{ scale: pressed ? 0.95 : 1 }}
-                  transition={{ duration: 120 }}
-                  className="bg-primary py-3 rounded-xl items-center"
-                >
-                  <Text className="text-white font-bodyBold text-lg">
-                    Fechar
+              <Text className="text-gray-300 text-center mb-6">
+                {selectedPlanet.description}
+              </Text>
+
+              <View className="flex-row flex-wrap justify-between gap-y-4 mb-6">
+                <View className="w-[48%] bg-white/5 rounded-xl p-3">
+                  <Text className="text-gray-400 text-center text-xs">
+                    Diâmetro
                   </Text>
-                </MotiView>
-              )}
-            </Pressable>
-          </Pressable>
-        </Pressable>
+                  <Text className="text-white text-center font-bodyBold">
+                    {selectedPlanet.diameter} km
+                  </Text>
+                </View>
+
+                <View className="w-[48%] bg-white/5 rounded-xl p-3">
+                  <Text className="text-gray-400 text-center text-xs">
+                    Distância
+                  </Text>
+                  <Text className="text-white text-center font-bodyBold">
+                    {selectedPlanet.distance} M km
+                  </Text>
+                </View>
+
+                <View className="w-[48%] bg-white/5 rounded-xl p-3">
+                  <Text className="text-gray-400 text-center text-xs">
+                    Luas
+                  </Text>
+                  <Text className="text-white text-center font-bodyBold">
+                    {selectedPlanet.moons}
+                  </Text>
+                </View>
+
+                <View className="w-[48%] bg-white/5 rounded-xl p-3">
+                  <Text className="text-gray-400 text-center text-xs">
+                    Descoberta
+                  </Text>
+                  <Text className="text-white text-center font-bodyBold">
+                    {selectedPlanet.discovery}
+                  </Text>
+                </View>
+              </View>
+
+              <Pressable
+                onPress={() => setSelectedPlanet(null)}
+                className="bg-primary py-3 rounded-xl items-center"
+              >
+                <Text className="text-white font-bodyBold">
+                  Fechar
+                </Text>
+              </Pressable>
+            </View>
+          )}
+        </View>
       </Modal>
     </>
   );
