@@ -12,28 +12,14 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
+import { carouselItems } from "@/src/data/carouselItems";
+
 const { width } = Dimensions.get("window");
 
-const images = [
-  {
-    id: "1",
-    source: require("../../assets/images/solarSystemImage.jpg"),
-    title: "Nosso Sistema Solar",
-    route: "/home/solar",
-  },
-  {
-    id: "2",
-    source: require("../../assets/images/galaxyImage.jpg"),
-    title: "Galáxias Distantes",
-    route: "/home/galaxy",
-  },
-  {
-    id: "3",
-    source: require("../../assets/images/moonImage.jpg"),
-    title: "A Lua",
-    route: "/home/moon",
-  },
-];
+type CarouselItemProps = {
+  item: (typeof carouselItems)[number];
+  i: number;
+};
 
 export default function ImageCarousel() {
   const flatListRef = useRef<FlatList>(null);
@@ -43,6 +29,7 @@ export default function ImageCarousel() {
   const entryOpacity = useRef(new Animated.Value(0)).current;
   const entryTranslate = useRef(new Animated.Value(20)).current;
 
+  // Animação de entrada
   useEffect(() => {
     Animated.parallel([
       Animated.timing(entryOpacity, {
@@ -58,20 +45,23 @@ export default function ImageCarousel() {
     ]).start();
   }, []);
 
+  // Auto-scroll
   useEffect(() => {
     const interval = setInterval(() => {
-      const nextIndex = (index + 1) % images.length;
+      const nextIndex = (index + 1) % carouselItems.length;
+
       flatListRef.current?.scrollToOffset({
         offset: nextIndex * width,
         animated: true,
       });
+
       setIndex(nextIndex);
     }, 4500);
 
     return () => clearInterval(interval);
   }, [index]);
 
-  function CarouselItem({ item, i }: any) {
+  function CarouselItem({ item, i }: CarouselItemProps) {
     const opacity = scrollX.interpolate({
       inputRange: [(i - 1) * width, i * width, (i + 1) * width],
       outputRange: [0.6, 1, 0.6],
@@ -102,7 +92,7 @@ export default function ImageCarousel() {
             {item.title}
           </Text>
 
-          <Pressable onPress={() => router.push(item.route)}>
+          <Pressable onPress={() => router.push(item.route as any)}>
             <View className="bg-white/90 p-3 rounded-full">
               <Ionicons name="arrow-forward" size={20} color="#0B0530" />
             </View>
@@ -122,7 +112,7 @@ export default function ImageCarousel() {
     >
       <Animated.FlatList
         ref={flatListRef}
-        data={images}
+        data={carouselItems}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
@@ -139,8 +129,9 @@ export default function ImageCarousel() {
         }
       />
 
+      {/* Indicadores */}
       <View className="flex-row justify-center mt-4">
-        {images.map((_, i) => {
+        {carouselItems.map((_, i) => {
           const inputRange = [
             (i - 1) * width,
             i * width,

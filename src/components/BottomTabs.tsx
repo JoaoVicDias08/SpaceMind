@@ -2,20 +2,7 @@ import { View, Text, Pressable } from "react-native";
 import { router, usePathname } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
-type IoniconName = React.ComponentProps<typeof Ionicons>["name"];
-
-type TabItem = {
-  name: string;
-  route: `/${string}`; 
-  icon: IoniconName;
-};
-
-const tabs: TabItem[] = [
-  { name: "Home", route: "/home/home", icon: "home" },
-  { name: "Galáxia", route: "/home/galaxy", icon: "compass" },
-  { name: "Curiosidades", route: "/home/others", icon: "newspaper" },
-  { name: "Sobre", route: "/home/about", icon: "information-circle" },
-];
+import { tabs } from "@/src/data/tabs";
 
 export default function BottomTabs() {
   const pathname = usePathname();
@@ -26,7 +13,10 @@ export default function BottomTabs() {
         const isActive = pathname.startsWith(tab.route);
 
         return (
-          <Pressable key={tab.route} onPress={() => router.push(tab.route as any)}>
+          <Pressable
+            key={tab.route}
+            onPress={() => router.push(tab.route as any)}
+          >
             <View className="items-center">
               <Ionicons
                 name={tab.icon}
@@ -35,7 +25,7 @@ export default function BottomTabs() {
               />
 
               <Text
-                className={`${isActive ? "text-text-light font-bodyBold" : "text-text-light font-bodyBold"} text-xs`}
+                className={`text-xs font-bodyBold text-text-light`}
               >
                 {tab.name}
               </Text>

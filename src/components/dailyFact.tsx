@@ -5,20 +5,14 @@ import { useEffect, useState } from "react";
 import { Text, View, Share, Pressable } from "react-native";
 import { MotiView } from "moti";
 
+import { dailyFacts } from "@/src/data/dailyFacts";
+
 const STORAGE_KEY = "@daily_fact_v2";
 
-const facts = [
-  { title: "O Sol domina o Sistema Solar", description: "O Sol representa cerca de 99,86%..." },
-  { title: "A luz solar viaja pelo espaço", description: "A luz emitida pelo Sol leva aproximadamente 8 minutos..." },
-  { title: "Vênus desafia o conceito de tempo", description: "Em Vênus, um único dia é mais longo do que um ano..." },
-  { title: "Júpiter é um verdadeiro gigante", description: "Júpiter é tão grande que caberiam mais de 1.300 planetas Terra..." },
-  { title: "A Lua está se afastando", description: "A Lua se afasta da Terra cerca de 3,8 centímetros por ano..." },
-  { title: "O universo está em constante movimento", description: "A Via Láctea não está parada no espaço..." },
-];
-
 export default function DailyFact() {
-  // Começa com um fato aleatório imediatamente
-  const [fact, setFact] = useState(() => facts[Math.floor(Math.random() * facts.length)]);
+  const [fact, setFact] = useState(
+    () => dailyFacts[Math.floor(Math.random() * dailyFacts.length)]
+  );
 
   function getTodayKey() {
     const today = new Date();
@@ -32,17 +26,20 @@ export default function DailyFact() {
     if (stored) {
       const parsed = JSON.parse(stored);
       if (parsed.date === todayKey) {
-        setFact(parsed.fact); // Atualiza para o fato real do dia
+        setFact(parsed.fact);
         return;
       }
     }
 
-    const newFact = facts[Math.floor(Math.random() * facts.length)];
+    const newFact =
+      dailyFacts[Math.floor(Math.random() * dailyFacts.length)];
+
     await AsyncStorage.setItem(
       STORAGE_KEY,
       JSON.stringify({ date: todayKey, fact: newFact })
     );
-    setFact(newFact); // Atualiza para o novo fato
+
+    setFact(newFact);
   }
 
   useEffect(() => {
@@ -85,7 +82,11 @@ export default function DailyFact() {
                 transition={{ type: "timing", duration: 120 }}
                 className="bg-white/10 p-2 rounded-full border border-white/10"
               >
-                <Ionicons name="share-social-outline" size={18} color="#fff" />
+                <Ionicons
+                  name="share-social-outline"
+                  size={18}
+                  color="#fff"
+                />
               </MotiView>
             )}
           </Pressable>
@@ -97,8 +98,12 @@ export default function DailyFact() {
           animate={{ opacity: 1, translateY: 0 }}
           transition={{ type: "timing", duration: 500 }}
         >
-          <Text className="text-white text-lg font-semibold mb-2">{fact.title}</Text>
-          <Text className="text-white/90 text-base leading-relaxed">{fact.description}</Text>
+          <Text className="text-white text-lg font-semibold mb-2">
+            {fact.title}
+          </Text>
+          <Text className="text-white/90 text-base leading-relaxed">
+            {fact.description}
+          </Text>
         </MotiView>
       </LinearGradient>
     </MotiView>

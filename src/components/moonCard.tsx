@@ -4,36 +4,7 @@ import { MotiView } from "moti";
 import LottieView from "lottie-react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const moonPhases = [
-  {
-    id: "new",
-    name: "Lua Nova",
-    description:
-      "A Lua Nova ocorre quando a Lua está entre a Terra e o Sol. Ela não é visível da Terra e marca o início de um novo ciclo lunar.",
-    color: "#7C6CFF",
-  },
-  {
-    id: "waxing",
-    name: "Crescente",
-    description:
-      "Durante a fase Crescente, a Lua começa a se tornar visível após a Lua Nova, iluminando gradualmente seu lado direito.",
-    color: "#4FD1C5",
-  },
-  {
-    id: "full",
-    name: "Lua Cheia",
-    description:
-      "A Lua Cheia ocorre quando a Lua está totalmente iluminada pelo Sol e é visível como um círculo completo no céu noturno.",
-    color: "#F6E05E",
-  },
-  {
-    id: "waning",
-    name: "Minguante",
-    description:
-      "Na fase Minguante, a Lua começa a diminuir sua luminosidade após a Lua Cheia, iluminando gradualmente seu lado esquerdo.",
-    color: "#A0AEC0",
-  },
-];
+import { moonPhases } from "@/src/data/moonPhases";
 
 export default function MoonCard() {
   const [selectedPhase, setSelectedPhase] = useState(moonPhases[0]);
@@ -41,6 +12,7 @@ export default function MoonCard() {
 
   return (
     <View className="px-4 mt-12">
+      {/* TÍTULO */}
       <MotiView
         from={{ opacity: 0, translateY: 14 }}
         animate={{ opacity: 1, translateY: 0 }}
@@ -67,6 +39,7 @@ export default function MoonCard() {
         <View className="w-20 h-[2px] bg-purple-400/60 mt-2 rounded-full" />
       </MotiView>
 
+      {/* ANIMAÇÃO */}
       <View className="w-full items-center justify-center mt-8 mb-6">
         <MotiView
           from={{ opacity: 0, scale: 0.85 }}
@@ -82,6 +55,7 @@ export default function MoonCard() {
         </MotiView>
       </View>
 
+      {/* BOTÕES DAS FASES */}
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -95,7 +69,10 @@ export default function MoonCard() {
           const isActive = selectedPhase.id === phase.id;
 
           return (
-            <Pressable key={phase.id} onPress={() => setSelectedPhase(phase)}>
+            <Pressable
+              key={phase.id}
+              onPress={() => setSelectedPhase(phase)}
+            >
               <MotiView
                 animate={{
                   scale: isActive ? 1.1 : 1,
@@ -125,6 +102,7 @@ export default function MoonCard() {
         })}
       </ScrollView>
 
+      {/* CARD DE DETALHES */}
       <MotiView
         key={selectedPhase.id}
         from={{ opacity: 0, translateY: 10 }}

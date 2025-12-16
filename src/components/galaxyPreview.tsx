@@ -3,40 +3,7 @@ import { View, Text, Pressable, Image, Animated } from "react-native";
 import { MotiView } from "moti";
 import { LinearGradient } from "expo-linear-gradient";
 
-const galaxies = [
-  {
-    id: "spiral",
-    name: "Espiral",
-    example: "Via Láctea",
-    description: "Braços em espiral com intensa formação estelar.",
-    image: require("../../assets/galaxies/spiral.jpg"),
-    color: "#7C6CFF",
-  },
-  {
-    id: "elliptical",
-    name: "Elíptica",
-    example: "Messier 87",
-    description: "Formato oval, estrelas antigas e pouco gás.",
-    image: require("../../assets/galaxies/elliptical.jpg"),
-    color: "#FF6FD8",
-  },
-  {
-    id: "irregular",
-    name: "Irregular",
-    example: "Grande Nuvem de Magalhães",
-    description: "Sem forma definida, comum após colisões.",
-    image: require("../../assets/galaxies/irregular.jpg"),
-    color: "#4FD1C5",
-  },
-  {
-    id: "lenticular",
-    name: "Lenticular",
-    example: "NGC 5866",
-    description: "Transição entre espiral e elíptica.",
-    image: require("../../assets/galaxies/lenticular.jpg"),
-    color: "#F6AD55",
-  },
-];
+import { galaxies } from "@/src/data/galaxies";
 
 export default function GalaxyPreview() {
   const [selected, setSelected] = useState(galaxies[0]);
@@ -150,7 +117,10 @@ export default function GalaxyPreview() {
             const isActive = selected.id === galaxy.id;
 
             return (
-              <Pressable key={galaxy.id} onPress={() => setSelected(galaxy)}>
+              <Pressable
+                key={galaxy.id}
+                onPress={() => setSelected(galaxy)}
+              >
                 <MotiView
                   animate={{
                     scale: isActive ? 1.1 : 1,
